@@ -3,6 +3,7 @@ clear
 close all
 folder_address = 'C:\Users\mrirc\Desktop\Master Data\IRB17\pat083';
 load(fullfile(folder_address,'DWI.mat'))
+load(fullfile(folder_address,'DWI.mat'))
 load(fullfile(folder_address,'DCE.mat'))
 DCE = scanned_image;
 load(fullfile(folder_address,'pat083_cancer_mask.mat'))

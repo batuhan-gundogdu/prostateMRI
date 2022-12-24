@@ -40,5 +40,6 @@ for slice=1:size(hybrid_data,3)
     end
 
 end
-verified = True;
+close all
+verified = 1;
 save(fullfile(foldername, "master.mat"), "-v7.3")

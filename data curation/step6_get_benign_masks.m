@@ -2,14 +2,12 @@
 clc
 clear
 close all
-foldername = "C:\Users\Gundogdu\Desktop\University of Chicago\PATIENT_DATA\IRB17\pat083";
-load(fullfile(foldername, 'T2.mat'))
+foldername = "C:\Users\mrirc\Desktop\Master Data\IRB17\pat083";
 load(fullfile(foldername, "pat083_hybridSortedInput.mat"))
 benign_mask = zeros(128, 128, size(hybrid_data,3));
 bb = [0, 150, 1000, 1500];
-imshow3D(scanned_image)
 figure
-for slice=9:size(hybrid_data,3)-5
+for slice=16:19
     img2 = squeeze(hybrid_data(:, :, slice, :, 1));
     adc = zeros(128);
     for row=1:128
@@ -21,7 +19,7 @@ for slice=9:size(hybrid_data,3)-5
     adc = imresize(adc,16,'bilinear');
     imagesc(adc, [0.3, 3]);
     axis('off')
-    title(["Slice ", num2str(slice)])
+    title(["Slice ", num2str(slice)]) 
     colormap('gray')
     hold on
     movegui("center")
@@ -32,7 +30,7 @@ for slice=9:size(hybrid_data,3)-5
     %pass = input("press key to pass");
     %hold off
 end
-filename = "C:\Users\Gundogdu\Desktop\University of Chicago\PATIENT_DATA\IRB17\pat083\pat083_benign_mask.mat";
 
+filename = fullfile(foldername, 'benign_mask.mat');
 save(filename, 'benign_mask')
 disp(strcat(filename, ' saved!'))

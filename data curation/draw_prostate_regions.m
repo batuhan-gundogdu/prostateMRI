@@ -1,3 +1,11 @@
+% draw the prostate masks for the whole prostate and TZ
+% 1/22/2023
+% Author: Batuhan Gundogdu
+% Use this function to draw prostate masks on the relevant slices
+% Make sure to change the address and the relevant slice range in the for
+% loop
+% the prostate masks are saved them as MATLAB files
+%% change the address for the current patient
 close all
 clear
 clc

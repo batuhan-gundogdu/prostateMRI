@@ -1,9 +1,13 @@
-% define the filenames
+% step-2 reconstruction of raw DWI images
+% 1/22/2023
+% Author: Batuhan Gundogdu
+% This function reads the clinical DWI and Hybrid images from raw files
+% and reconstructs them using MRECON, finally saves them as MATLAB files
+% This function takes some time
+%% change the following folder addresses for each patient
 clc
 close all;
 clear
-
-%% change the following folder addresses
 patient_folder = 'C:\Users\mrirc\Desktop\Deep_Learning_Dataset\IRB17-1694 Pt 083\Guo_Rawdata\2021_08_24\RO_26421';
 master_directory = 'C:\Users\mrirc\Desktop\Master Data\IRB17\pat083';
 %%
@@ -77,4 +81,55 @@ for k = keys(scans)
     mat_address = fullfile(master_directory, key);
     save(mat_address, 'raw')
 end
-disp('Done!')
+disp('Reconstruction is Done! Now merging the files')
+
+
+clear
+
+master_directory = 'C:\Users\mrirc\Desktop\Master Data\IRB17\pat083';
+load(fullfile(master_directory,'HM57.mat'))
+raw57 = raw;
+load(fullfile(master_directory,'HM70.mat'))
+raw70 = raw;
+load(fullfile(master_directory,'HM150.mat'))
+raw150 = raw;
+load(fullfile(master_directory,'HM200.mat'))
+raw200 = raw;
+
+num_slices = size(raw57,3);
+num_voxels = size(raw57,2);
+
+hybrid_raw = cell(4,4);
+TEs = {'raw57', 'raw70', 'raw150', 'raw200'};
+for i=1:4
+    temp = abs(squeeze(eval(TEs{i})));
+    hybrid_raw{1, i} = squeeze(mean(temp(:,:,:,1,1,1:2),[5,6]));
+    hybrid_raw{2, i} = reshape(temp(:,:,:,2,1:3,1), num_voxels,num_voxels, num_slices, 3);
+    hybrid_raw{3, i} = reshape(temp(:,:,:,3,1:3,1), num_voxels, num_voxels, num_slices,3);
+    hybrid_raw{4, i} = reshape(temp(:,:,:,4,1:3,1:4), num_voxels, num_voxels, num_slices,12);
+end
+
+mat_address = fullfile(master_directory, 'Hybrid6D_raw.mat');
+save(mat_address, 'hybrid_raw')
+
+delete(fullfile(master_directory,'HM57.mat'))
+delete(fullfile(master_directory,'HM70.mat'))
+delete(fullfile(master_directory,'HM150.mat'))
+delete(fullfile(master_directory,'HM200.mat'))
+
+load(fullfile(master_directory,'DWI.mat'))
+
+num_slices = size(raw,3);
+num_voxels = size(raw,2);
+temp = raw;
+b0 = squeeze(mean(temp(:,:,:,1,1,1:2),[5,6]));
+b1 = reshape(temp(:,:,:,2,1:3,1:2), num_voxels, num_voxels, num_slices, 6);
+b2 = reshape(temp(:,:,:,3,1:3,1:2), num_voxels, num_voxels, num_slices, 6);
+b3 = reshape(temp(:,:,:,4,1:3,1:4), num_voxels, num_voxels, num_slices,12);
+b4 = reshape(temp(:,:,:,4,1:3,1:6), num_voxels, num_voxels, num_slices,18);
+
+
+mat_address = fullfile(master_directory, 'DWI.mat');
+save(mat_address, 'raw','b0',"b1","b2","b3","b4")
+
+disp('All Done!')

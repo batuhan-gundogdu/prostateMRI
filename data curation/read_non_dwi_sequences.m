@@ -1,10 +1,13 @@
-% define the filenames
+% read non-dwi sequences from parrecs
+% 1/22/2023
+% Author: Batuhan Gundogdu
+% This function reads the T1W, T2W and DCE images from PARRECs and
+% saves them as MATLAB files
+%% Confirm the following from the scans
 clc
 close all;
 clear
-
 scans = containers.Map();
-%% Confirm the following from the scans
 scans('T2_3D.mat') = 2;
 scans('T1.mat') = 5;
 scans('T2.mat') = 6;

@@ -13,13 +13,13 @@ scans('T1.mat') = 5;
 scans('T2.mat') = 6;
 scans('DCE.mat') = 12;
 %% Change the following two variables
-pt_id = 83;
-pt_folder = 'C:\Users\mrirc\Desktop\Deep_Learning_Dataset\IRB17-1694 Pt 083\parrec data';
-master_folder = 'C:\Users\mrirc\Desktop\Master Data\IRB17\pat083';
+pt_id = 65;
+pt_folder = 'C:\Users\mrirc\Desktop\Deep_Learning_Dataset\IRB17-1694 Pt 065\PARREC';
+master_folder = 'C:\Users\mrirc\Desktop\Master Data\IRB17\pat065';
 %%
 for k = keys(scans)
     key = k{1};
-    par_file = sprintf('IRB 17-1694 pt%03d_%d_1.PAR', pt_id, scans(key))
+    par_file = sprintf('IRB17-1694-Pt%03d_%d_1.PAR', pt_id, scans(key))
     fileID = fopen(fullfile(pt_folder,par_file),'r');
     lines = textscan(fileID,'%s','delimiter','\n');
     fclose(fileID);

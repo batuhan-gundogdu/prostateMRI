@@ -9,13 +9,14 @@
 clc
 clear
 close all
-foldername = "C:\Users\mrirc\Desktop\Master Data\IRB17\pat083";
-load(fullfile(foldername, "pat083_hybridSortedInput.mat"))
+foldername = "C:\Users\mrirc\Desktop\Master Data\IRB17\pat065";
+load(fullfile(foldername, "pat065_hybridSortedInput.mat"))
 %% change the range of the slices below
 cancer_mask = zeros(128, 128, size(hybrid_data,3));
+num_cancers = 2;
 bb = [0, 150, 1000, 1500];
 figure
-for slice=15:20
+for slice=15:15
     img2 = squeeze(hybrid_data(:, :, slice, :, 1));
     adc = zeros(128);
     for row=1:128
@@ -31,10 +32,12 @@ for slice=15:20
     colormap('gray')
     hold on
     movegui("center")
-    roi = drawfreehand(gca,"Color",'r');
-    mask = roi.createMask(adc);
-    mask = imresize(mask, 1/16,'bilinear');
-    cancer_mask(:,:, slice) = mask;
+    for j=1:num_cancers
+        roi = drawfreehand(gca,"Color",'r');
+        mask = roi.createMask(adc);
+        mask = imresize(mask, 1/16,'bilinear');
+        cancer_mask(:,:, slice) = cancer_mask(:,:, slice) + mask;
+    end
     %pass = input("press key to pass");
     %hold off
 end

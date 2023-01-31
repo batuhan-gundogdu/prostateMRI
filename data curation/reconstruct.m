@@ -8,8 +8,8 @@
 clc
 close all;
 clear
-patient_folder = 'C:\Users\mrirc\Desktop\Deep_Learning_Dataset\IRB17-1694 Pt 083\Guo_Rawdata\2021_08_24\RO_26421';
-master_directory = 'C:\Users\mrirc\Desktop\Master Data\IRB17\pat083';
+patient_folder = 'C:\Users\mrirc\Desktop\Deep_Learning_Dataset\IRB17-1694 Pt 065\raw data\2021_02_22\LA_162730';
+master_directory = 'C:\Users\mrirc\Desktop\Master Data\IRB17\pat065';
 %%
 scans = containers.Map();
 
@@ -84,9 +84,6 @@ end
 disp('Reconstruction is Done! Now merging the files')
 
 
-clear
-
-master_directory = 'C:\Users\mrirc\Desktop\Master Data\IRB17\pat083';
 load(fullfile(master_directory,'HM57.mat'))
 raw57 = raw;
 load(fullfile(master_directory,'HM70.mat'))

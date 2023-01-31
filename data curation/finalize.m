@@ -5,8 +5,8 @@
 clc
 clear
 close all
-folder_address = 'C:\Users\mrirc\Desktop\Master Data\IRB17\pat083';
-hybrid_data = 'pat083_hybridSortedInput.mat';
+folder_address = 'C:\Users\mrirc\Desktop\Master Data\IRB17\pat065';
+hybrid_data = 'pat065_hybridSortedInput.mat';
 %% the rest should work with no problem
 load(fullfile(folder_address,'DCE.mat'))
 DCE = scanned_image;

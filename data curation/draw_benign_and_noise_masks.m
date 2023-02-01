@@ -10,13 +10,13 @@
 clc
 clear
 close all
-foldername = "C:\Users\mrirc\Desktop\Master Data\IRB17\pat065";
-load(fullfile(foldername, "pat065_hybridSortedInput.mat"))
+foldername = "C:\Users\mrirc\Desktop\Master Data\IRB17\pat089";
+load(fullfile(foldername, "pat089_hybridSortedInput.mat"))
 benign_mask = zeros(128, 128, size(hybrid_data,3));
 noise_mask = zeros(128, 128, size(hybrid_data,3));
 bb = [0, 150, 1000, 1500];
 figure
-for slice=18:18 % make sure to select one slice only
+for slice=15:15 % make sure to select one slice only
     img2 = squeeze(hybrid_data(:, :, slice, :, 1));
     adc = zeros(128);
     for row=1:128

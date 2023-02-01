@@ -9,14 +9,14 @@
 clc
 clear
 close all
-foldername = "C:\Users\mrirc\Desktop\Master Data\IRB17\pat065";
-load(fullfile(foldername, "pat065_hybridSortedInput.mat"))
+foldername = "C:\Users\mrirc\Desktop\Master Data\IRB17\pat089";
+load(fullfile(foldername, "pat089_hybridSortedInput.mat"))
 %% change the range of the slices below
 cancer_mask = zeros(128, 128, size(hybrid_data,3));
-num_cancers = 2;
+num_cancers = 1;
 bb = [0, 150, 1000, 1500];
 figure
-for slice=15:15
+for slice=6:18
     img2 = squeeze(hybrid_data(:, :, slice, :, 1));
     adc = zeros(128);
     for row=1:128

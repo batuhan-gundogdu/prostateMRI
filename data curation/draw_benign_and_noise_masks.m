@@ -10,8 +10,8 @@
 clc
 clear
 close all
-foldername = "C:\Users\mrirc\Desktop\Master Data\IRB17\pat089";
-load(fullfile(foldername, "pat089_hybridSortedInput.mat"))
+foldername = "C:\Users\mrirc\Desktop\Master Data\IRB17\pat104";
+load(fullfile(foldername, "pat104_hybridSortedInput.mat"))
 benign_mask = zeros(128, 128, size(hybrid_data,3));
 noise_mask = zeros(128, 128, size(hybrid_data,3));
 bb = [0, 150, 1000, 1500];

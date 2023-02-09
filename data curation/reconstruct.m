@@ -8,17 +8,17 @@
 clc
 close all;
 clear
-patient_folder = 'C:\Users\mrirc\Desktop\Deep_Learning_Dataset\IRB17-1694 Pt 089\raw data\2022_01_10\ME_4437';
-master_directory = 'C:\Users\mrirc\Desktop\Master Data\IRB17\pat089';
+patient_folder = 'C:\Users\mrirc\Desktop\Deep_Learning_Dataset\IRB17-1694 Pt 099\raw data\2022_06_01\UR_19151';
+master_directory = 'C:\Users\mrirc\Desktop\Master Data\IRB17\pat099';
 %%
 scans = containers.Map();
 
 listOfFiles = dir(patient_folder);
 for f=1:length(listOfFiles)
     filename = listOfFiles(f).name;
-    if endsWith(filename, '7_wip_senserefscanV4.raw')
+    if endsWith(filename, 'senserefscanV4.raw')
         refscan = filename;
-    elseif endsWith(filename, '2_wip_coilsurveyscanV4.raw')
+    elseif endsWith(filename, 'coilsurveyscanV4.raw')
         coilsurveyscan = filename;
     elseif endsWith(filename, 'te057_4bV4.raw')
         scans('HM57.mat') = filename;
@@ -30,9 +30,6 @@ for f=1:length(listOfFiles)
         scans('HM200.mat') = filename;
     elseif endsWith(filename, 'dwi_max_4bV4.raw')
         scans('DWI.mat') = filename;
-    elseif endsWith(filename, 'dwi_batuV4.raw')
-        scans('SR.mat') = filename;
-        
 
     end
 end

@@ -8,23 +8,21 @@ clc
 close all;
 clear
 scans = containers.Map();
-% scans('T2_3D.mat') = 2;
-% scans('T1.mat') = 6;
-% scans('T2.mat') = 7;
-% scans('DCE.mat') = 18;
+scans('T2_3D.mat') = 2;
+scans('T1.mat') = 5;
+scans('T2.mat') = 6;
+scans('DCE.mat') = 14;
 
 
-scans('FFE1.mat') = 15;
-scans('FFE2.mat') = 16;
-scans('FFE3.mat') = 17;
+
 %% Change the following two variables
-pt_id = 89;
-pt_folder = 'C:\Users\mrirc\Desktop\Deep_Learning_Dataset\IRB17-1694 Pt 089\PARREC';
-master_folder = 'C:\Users\mrirc\Desktop\Master Data\IRB17\pat089';
+pt_id = 99;
+pt_folder = 'C:\Users\mrirc\Desktop\Deep_Learning_Dataset\IRB17-1694 Pt 099\PARREC';
+master_folder = 'C:\Users\mrirc\Desktop\Master Data\IRB17\pat099';
 %%
 for k = keys(scans)
     key = k{1};
-    par_file = sprintf('IRB17-1694-Pt%03d-REPEAT_%d_1.PAR', pt_id, scans(key))
+    par_file = sprintf('IRB17-1694-Pt%03d_%d_1.PAR', pt_id, scans(key))
     fileID = fopen(fullfile(pt_folder,par_file),'r');
     lines = textscan(fileID,'%s','delimiter','\n');
     fclose(fileID);

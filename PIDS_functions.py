@@ -42,7 +42,7 @@ def detect_PIDS_slice(b, S):
             PIDS_ADC2[row, col] = int(adc < 0)
             for _b in range(num_bvalues):
                 signals_along_te = np.squeeze(S[row,col, _b, :])
-                to_compare = signals_along_te.copy().astype(int)
+                to_compare = signals_along_te.copy().astype(float32)
                 to_compare[1:] = signals_along_te[:3]
                 is_pids = signals_along_te - to_compare
                 for local in range(3):
@@ -50,7 +50,7 @@ def detect_PIDS_slice(b, S):
                     PIDS_TE_decay[row, col, _b, local] = is_pids_
             for _te in range(num_TEs):
                 signals_along_b = np.squeeze(S[row,col, :, _te])
-                to_compare = signals_along_b.copy().astype(int)
+                to_compare = signals_along_b.copy().astype(float32)
                 to_compare[1:] = signals_along_b[:3]
                 is_pids = signals_along_b - to_compare
                 for local in range(3):
